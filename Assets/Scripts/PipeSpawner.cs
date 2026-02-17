@@ -1,8 +1,10 @@
-using UnityEngine;
+п»їusing UnityEngine;
+using TMPro;
 
 public class PipeSpawner : MonoBehaviour
 {
     public GameObject pipePrefab;
+    public GameObject scoreZonePrefab;
 
     public float spawnRate = 2f;
     public float spawnX = 10f;
@@ -10,11 +12,16 @@ public class PipeSpawner : MonoBehaviour
     public float gap = 4f;
     public float heightRange = 3f;
 
+    public TextMeshProUGUI scoreText;
+    int score = 0;
+
     float pipeHalfHeight;
 
     void Start()
     {
-        // автоматически получаем высоту префаба
+        score = 0;
+        UpdateScoreUI();
+
         SpriteRenderer sr = pipePrefab.GetComponent<SpriteRenderer>();
         pipeHalfHeight = sr.bounds.size.y / 2f;
 
@@ -25,10 +32,7 @@ public class PipeSpawner : MonoBehaviour
     {
         float centerY = Random.Range(-heightRange, heightRange);
 
-        // нижняя труба — её верх должен быть у gap
         float bottomY = centerY - gap / 2f - pipeHalfHeight;
-
-        // верхняя труба — её низ должен быть у gap
         float topY = centerY + gap / 2f + pipeHalfHeight;
 
         Instantiate(pipePrefab,
@@ -38,5 +42,24 @@ public class PipeSpawner : MonoBehaviour
         Instantiate(pipePrefab,
             new Vector3(spawnX, topY, 0),
             Quaternion.Euler(0, 0, 180));
+
+        // в­ђ СЃРѕР·РґР°С‘Рј ScoreZone РІРЅСѓС‚СЂРё gap
+        Instantiate(scoreZonePrefab,
+            new Vector3(spawnX, centerY, 0),
+            Quaternion.identity);
+        
+    }
+
+    public void AddScore()
+    {
+        if (GameStarter.isGameOver) return;
+
+        score++;
+        UpdateScoreUI();
+    }
+
+    void UpdateScoreUI()
+    {
+        scoreText.text = score.ToString();
     }
 }
