@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameStarter : MonoBehaviour
 {
     public GameObject startUI;
+    public GameObject endGameUI;
 
     public static bool gameStarted = false;
     public static bool isGameOver = false;
@@ -10,8 +11,12 @@ public class GameStarter : MonoBehaviour
 
     void Start()
     {
+        gameStarted = false;
+        isGameOver = false;
+
         Time.timeScale = 0f;
     }
+
 
     void Update()
     {
@@ -27,6 +32,7 @@ public class GameStarter : MonoBehaviour
     void StartGame()
     {
         gameStarted = true;
+        endGameUI.SetActive(false);
         startUI.SetActive(false);
         Time.timeScale = 1f;
     }
