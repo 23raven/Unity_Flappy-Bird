@@ -1,7 +1,7 @@
 # Unity Flappy Bird 🐦
 
 A simple **Flappy Bird clone** built with Unity.  
-This project was created as a learning exercise and includes core gameplay mechanics, UI systems, scoring, restart logic, and basic game state management.
+This project was created as a learning exercise and includes core gameplay mechanics, UI systems, scoring, restart logic and basic game state management.
 
 ---
 
